@@ -9,6 +9,8 @@
 
 `mvn test -Dcucumber.filter.tags="@tagname"`
 
+`mvn test -Dcucumber.filter.tags="@tagname and not @tagname"`
+
 ### How to run specific scenario from a feature file
 (Specify a particular scenario by *line*)
 
