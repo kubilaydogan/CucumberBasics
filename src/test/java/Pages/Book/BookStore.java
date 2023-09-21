@@ -1,55 +1,46 @@
 package Pages.Book;
 
-import java.util.*;
+import io.cucumber.datatable.DataTable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class BookStore {
     public static List<Book> books = new ArrayList<>();
 
-    public static Integer getCountOfBooksByAuthor(String author) {
-        int count = 0;
-        for(Book each : books){
-            if(each.getAuthor().equalsIgnoreCase(author)){
-                count += 1;
-            }
+    public static void addAllBooks(DataTable dataTable) {
+        List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);
+        for (Map<String, String> columns : rows) {
+            addBook(new Book(columns.get("title"), columns.get("author")));
         }
-        return count;
     }
 
-    public static Integer getCountOfBooksByTitle(String title) {
-        int count = 0;
-        for(Book each : books){
-            if(each.getTitle().equalsIgnoreCase(title)){
-                count += 1;
-            }
-        }
-        return count;
+    public static List<Book> getBooksByAuthor(String author) {
+        return books.stream()
+                .filter(book -> Objects.equals(author, book.getAuthor()))
+                .collect(Collectors.toList());
     }
 
+    public static boolean bookExits(String bookName) {
+        String result = books.stream()
+                .filter(book -> bookName.equals(book.getTitle()))
+                .map(book -> book.getTitle())
+                .collect(Collectors.joining());
 
+        return result.contentEquals(bookName);
+    }
+
+    public static void addBooks(DataTable dataTable) {
+        List<List<String>> rows = dataTable.asLists(String.class);
+        for (List<String> columns : rows) {
+            addBook(new Book(columns.get(0), columns.get(1)));
+        }
+    }
+    
     public static void addBook(Book book) {
         books.add(book);
     }
-//
-//    public void addAllBooks(Collection<Book> books) {
-//        this.books.addAll(books);
-//    }
-//
-//    public List<Book> booksByAuthor(String author) {
-//        return books.stream()
-//                .filter(book -> Objects.equals(author, book.getAuthor()))
-//                .collect(Collectors.toList());
-//    }
-//
-//    public Optional<Book> bookByTitle(String title) {
-//        return books.stream()
-//                .filter(book -> book.getTitle().equals(title))
-//                .findFirst();
-//    }
-}
 
-/*
-    Optional is a container object used to contain not-null objects.
-    Optional object is used to represent null with absent value.
-    This class has various utility methods to facilitate code to
-    handle values as 'available' or 'not available' instead of checking null values.
- */
+}
