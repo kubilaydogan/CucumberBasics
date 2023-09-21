@@ -9,8 +9,10 @@ Feature: Book Store
       | The Devil in the White City          | Erik Larson |
       | The Lion, the Witch and the Wardrobe | C.S. Lewis  |
       | In the Garden of Beasts              | Erik Larson |
-    When I search for books by author "Erik Larson"
-    Then I find 2 books
+    Then verify 2 books by author "Erik Larson" exist
+    Then verify a book titled "The Lion, the Witch and the Wardrobe" exist in Bookstore
+
+
 
   Scenario: Correct number of books found by author by MAP
     Given I have the following books in the store by map
@@ -18,11 +20,8 @@ Feature: Book Store
       | The Devil in the White City          | Erik Larson |
       | The Lion, the Witch and the Wardrobe | C.S. Lewis  |
       | In the Garden of Beasts              | Erik Larson |
-    When I search for books by author "Erik Larson"
-    Then I find 2 books
 
-    When I search for books by author "Marcel Proust"
-    Then I find 0 books
-
-    When I search for a book titled "The Lion, the Witch and the Wardrobe"
-    Then I find 1 book
+    Then verify 2 books by author "Erik Larson" exist
+    Then verify 1 book by author "C.S. Lewis" exist
+    Then verify 0 books by author "Marcel Proust" exist
+    Then verify a book titled "The Lion, the Witch and the Wardrobe" exist in Bookstore
