@@ -1,4 +1,0 @@
-2023-09-20 21:48:48 [main] INFO  LoginPage:10 - admin has logged in
-2023-09-20 21:48:48 [main] INFO  LoginPage:10 - manager has logged in
-2023-09-20 21:48:48 [main] ERROR LogSteps:23 - Error occurred when doing the transaction: java.lang.ArithmeticException: / by zero
-2023-09-20 21:48:48 [main] ERROR LogSteps:24 - Error occurred when doing the transaction: / by zero
